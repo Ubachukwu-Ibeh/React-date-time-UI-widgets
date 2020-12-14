@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './calendar-styles/day.module.css';
+import styles from './calendar-styles/Day.module.css';
 
 function Day(props) {
     let lastNum;

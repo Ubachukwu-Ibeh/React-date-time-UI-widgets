@@ -1,0 +1,19 @@
+.container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 30px;
+}
+
+.container p {
+    margin: 10px auto;
+}
+
+.container p:first-child {
+    margin-top: 30px;
+}
+
+.container p:last-child {
+    margin-bottom: 50px;
+}

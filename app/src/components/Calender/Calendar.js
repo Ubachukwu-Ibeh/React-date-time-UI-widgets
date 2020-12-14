@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from './calendar-styles/calendar.module.css';
+import styles from './calendar-styles/Calendar.module.css';
 import Day from './Day.js';
 
 const date = new Date(),
@@ -11,7 +11,7 @@ year = date.getFullYear(),
 months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'],
 daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export default function Calendar() {
+function Calendar() {
     const [daysObject, setDaysObject] = useState((()=>{
         const obj = {};
         for(let i = 0; i < 42; i++){
@@ -23,7 +23,12 @@ export default function Calendar() {
     return (
         <>
         <div 
-        className={`${styles.card} ${dayOfWeek && styles.removeBottomMargin}`}
+        className={`${styles.card}`}
+        style={
+            {
+                marginBottom: dayOfWeek && '0px'
+            }
+        }
         >
             <p 
             className={styles.monthYear}
@@ -74,3 +79,4 @@ export default function Calendar() {
         </>
     )
 }
+export default React.memo(Calendar);

@@ -1,0 +1,36 @@
+.container {
+    margin: auto;
+    display: flex;
+    background-color: #f3f8ff;
+    padding: 30px 80px;
+    border-radius: 20px;
+}
+
+.digitsContainer {
+    margin: auto;
+    height: 100px;
+    width: 30px;
+    overflow-y: auto;
+    margin-left: 50px;
+}
+
+.ampm {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: 0px;
+    color: #aaaaaa;
+    width: 30px;
+}
+
+.ampm p:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+.ampm p:nth-child(2) {
+    margin-bottom: 0px;
+}
+
+.selected {
+    color: #77acff;
+    font-family: mb;
+}

@@ -3,9 +3,18 @@
     padding: 0px;
 }
 
+@font-face {
+    src: url(./fonts/Montserrat-Bold.otf);
+    font-family: mb;
+}
+
 .main {
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
