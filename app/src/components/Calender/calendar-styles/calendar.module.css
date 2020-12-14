@@ -1,0 +1,45 @@
+@font-face {
+    src: url(../../../fonts/Montserrat-Bold.otf);
+    font-family: mb;
+}
+
+.card {
+    padding: 10px 30px 30px 30px;
+    background-color: #f3f8ff;
+    margin: auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.daysCont {
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    width: 270px;
+    flex-wrap: wrap;
+}
+
+.monthYear {
+    margin: 20px auto;
+    font-family: mb;
+}
+
+.monthYear span {
+    color: #77acff;
+}
+
+.dayOfWeek {
+    font-size: 9pt;
+    margin: auto 10px;
+    color: #77acff;
+}
+
+.finalDate {
+    margin: auto;
+    margin-top: 20px;
+}
+
+.removeBottomMargin {
+    margin-bottom: 0px;
+}

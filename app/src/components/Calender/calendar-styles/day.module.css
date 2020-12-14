@@ -1,0 +1,26 @@
+@font-face {
+    src: url(../../../fonts/Montserrat-Bold.otf);
+    font-family: mb;
+}
+
+.day {
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    border-radius: 50%;
+    font-family: mb;
+}
+
+.day:hover {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #77acff;
+    color: white;
+}
+
+.day p {
+    margin: auto;
+}
