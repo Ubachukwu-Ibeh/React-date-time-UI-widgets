@@ -10,7 +10,6 @@ today = 1 - ((7 * Math.floor((1 - day) / 7)) + day),
 year = date.getFullYear(),
 months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'],
 daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-console.log(getDay)
 
 export default function Calendar() {
     const [daysObject, setDaysObject] = useState((()=>{
@@ -53,7 +52,8 @@ export default function Calendar() {
                         }
                        })(),
                        setDayOfWeek: setDayOfWeek,
-                       dayOfWeek: daysOfWeek[i % 7]
+                       dayOfWeek: daysOfWeek[i % 7],
+                       mark: today
                    }
                }
                />
