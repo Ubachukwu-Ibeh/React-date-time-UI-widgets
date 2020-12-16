@@ -10,14 +10,15 @@
 .digit {
     margin: 5px auto;
     font-family: mr;
+    color: #cccccc;
 }
 
 .container p:first-child {
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .container p:last-child {
-    margin-bottom: 40px;
+    margin-bottom: 44px;
 }
 
 .isInView {
@@ -25,4 +26,9 @@
     color: #77acff;
     font-family: mb;
     font-size: 20pt;
+}
+
+.isInView span {
+    font-size: 7pt;
+    font-family: mr;
 }
