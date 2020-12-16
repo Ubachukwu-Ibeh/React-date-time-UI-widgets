@@ -5,6 +5,8 @@
     height: 100px;
     width: 50px;
     overflow-y: auto;
+    margin-left: 30px;
+    margin-right: 0px;
 }
 
 .digit {

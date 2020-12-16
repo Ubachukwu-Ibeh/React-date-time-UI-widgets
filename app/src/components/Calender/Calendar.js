@@ -25,31 +25,33 @@ function Calendar() {
         return obj;
     })());
     const [dayOfWeek, setDayOfWeek] = useState({});
+    
     const digits = [];
     let limit = 0,
     weeks = 0;
-
     while(weeks < 7){
-    limit = 0;
-    digits[weeks] = [];
-    while(limit < 31){
-        digits[weeks].push(<Day 
-            key={limit + weeks}
-            data={
-                {
-                    daysObject: daysObject, 
-                    setDaysObject: setDaysObject, 
-                    id: monthArr[limit + weeks],
-                    setDayOfWeek: setDayOfWeek,
-                    dayOfWeek: daysOfWeek[weeks],
-                    mark: today
+        limit = 0;
+        digits[weeks] = [];
+        while(limit < 31){
+            digits[weeks].push(
+            <Day 
+                key={limit + weeks}
+                data={
+                    {
+                        daysObject: daysObject, 
+                        setDaysObject: setDaysObject, 
+                        id: monthArr[limit + weeks],
+                        setDayOfWeek: setDayOfWeek,
+                        dayOfWeek: daysOfWeek[weeks],
+                        mark: today
+                    }
                 }
-            }
-         />);
-        limit += 7;
-    }
-    weeks++;
-    }
+             />
+            );
+            limit += 7;
+        }
+        weeks++;
+        }
    
     return (
     <>
