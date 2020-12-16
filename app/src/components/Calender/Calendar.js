@@ -9,7 +9,12 @@ day = date.getUTCDate() - getDay,
 today = 1 - ((7 * Math.floor((1 - day) / 7)) + day),
 year = date.getFullYear(),
 months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+monthArr = Array(31 + today).fill(0);
+
+for(let i = today; i < monthArr.length; i++){
+     monthArr[i] = i - (today - 1);
+}
 
 function Calendar() {
     const [daysObject, setDaysObject] = useState((()=>{
@@ -20,8 +25,34 @@ function Calendar() {
         return obj;
     })());
     const [dayOfWeek, setDayOfWeek] = useState({});
+    const digits = [];
+    let limit = 0,
+    weeks = 0;
+
+    while(weeks < 7){
+    limit = 0;
+    digits[weeks] = [];
+    while(limit < 31){
+        digits[weeks].push(<Day 
+            key={limit + weeks}
+            data={
+                {
+                    daysObject: daysObject, 
+                    setDaysObject: setDaysObject, 
+                    id: monthArr[limit + weeks],
+                    setDayOfWeek: setDayOfWeek,
+                    dayOfWeek: daysOfWeek[weeks],
+                    mark: today
+                }
+            }
+         />);
+        limit += 7;
+    }
+    weeks++;
+    }
+   
     return (
-        <>
+    <>
         <div 
         className={`${styles.card}`}
         style={
@@ -35,34 +66,24 @@ function Calendar() {
             >
                 {'< '}{months[month]}<span> {year}</span>{' >'}
             </p>
-            <p>
-                {
-                    daysOfWeek.map((e, i) => <span key={i} className={styles.dayOfWeek}>{e}</span>)
-                }
-            </p>
+          
             <div 
             className={styles.daysCont}
             >
             {
-                Object.keys(daysObject).map((e, i) => 
-                <Day 
-                key={i} 
-                data={
-                   {
-                       daysObject: daysObject, 
-                       setDaysObject: setDaysObject, 
-                       id:(()=>{
-                        if(i >= today){
-                            return i - (today - 1);
-                        }
-                       })(),
-                       setDayOfWeek: setDayOfWeek,
-                       dayOfWeek: daysOfWeek[i % 7],
-                       mark: today
-                   }
-               }
-               />
-               )
+                digits.map((e, i) => 
+                <div 
+                key={i}
+                className={styles.weekCont}
+                >
+                    <p 
+                    key={i} 
+                    className={styles.dayOfWeek}>
+                        {daysOfWeek[i]}
+                    </p>
+                    {e}
+                </div>
+                )
             }
             </div>
         </div>
@@ -76,7 +97,7 @@ function Calendar() {
         >
             {dayOfWeek.dayOfWeek} <span>{`${dayOfWeek.dayNum}${dayOfWeek.prefix}`}</span> {months[month]}<span> {year}</span>
         </p>
-        </>
+    </>
     )
 }
 export default React.memo(Calendar);

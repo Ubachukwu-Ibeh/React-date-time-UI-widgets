@@ -16,8 +16,9 @@ function Digits(props) {
     const [isInView, setIsInView] = useState();
   
     const digitCont = useRef();
-
+    
     const setDigitSize = () => {
+        const digitContTop = digitCont.current.getBoundingClientRect().top;
         const scrollAmt = digitCont.current.scrollTop;
         const main = digitCont.current;
         const diff = scrollAmt - prev;
@@ -36,7 +37,7 @@ function Digits(props) {
                 const elem = elems[i];
                const top = elem.getBoundingClientRect().top + (elem.getBoundingClientRect().height / 2);
 
-               if(top < 565.25 && top > 550.25) {
+               if(top < digitContTop + 48 && top > digitContTop + 33) {
                    return [elems[i], i + 1];
                }
             }
@@ -73,7 +74,7 @@ function Digits(props) {
                     key={id}
                     className={inView ? styles.isInView : styles.digit}
                     >
-                        {id < 10 && nums.length > 12 ? '0' + id : id}<span>{inView && nums.length > 12 ? ' m' : inView && ' h'}</span>
+                        {id < 10 && nums.length > 12 ? '0' + (id - 1) : id}<span>{inView && nums.length > 12 ? ' m' : inView && ' h'}</span>
                     </p>
                 })
             }
