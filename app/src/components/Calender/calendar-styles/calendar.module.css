@@ -4,6 +4,7 @@
     margin: auto;
     border-radius: 20px;
     display: flex;
+    width: fit-content;
     flex-direction: column;
 }
 

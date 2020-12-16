@@ -2,12 +2,14 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    height: fit-content;
-    width: 30px;
+    height: 100px;
+    width: 50px;
+    overflow-y: auto;
 }
 
-.container p {
-    margin: 10px auto;
+.digit {
+    margin: 5px auto;
+    font-family: mr;
 }
 
 .container p:first-child {
@@ -15,5 +17,12 @@
 }
 
 .container p:last-child {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+}
+
+.isInView {
+    margin: 5px auto;
+    color: #77acff;
+    font-family: mb;
+    font-size: 20pt;
 }

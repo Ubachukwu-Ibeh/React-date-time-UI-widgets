@@ -8,6 +8,11 @@
     font-family: mb;
 }
 
+@font-face {
+    src: url(./fonts/Montserrat-Regular.otf);
+    font-family: mr;
+}
+
 .main {
     display: flex;
     flex-direction: column;
