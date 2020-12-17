@@ -39,3 +39,4 @@
 [1217/130403.241:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Brian\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\0b1d2670-a676-49fb-9248-f4359c9f1c9b: The system cannot find the path specified. (0x3)
 [1217/130405.827:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
 [1217/142448.713:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1217/162701.030:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

@@ -4,7 +4,6 @@ import Day from './Day.js';
 
 
 function Calendar() {
-    /** */
     const date = new Date();
     let [month, setMonth] = useState(date.getMonth()),
     getDay = date.getDay(),
@@ -26,14 +25,6 @@ function Calendar() {
     [staringDay, setStartingDay] = useState(1 - ((7 * Math.floor((1 - day) / 7)) + day));
 
     const switchMonth = (direction) => {
-        // setDaysObject(prev => {
-        //     const prevObj = {...prev};
-        //     for (const key in prevObj) {
-        //         prevObj[key] && (prevObj[key] = false);
-        //     }
-        //     return prevObj;
-        // });
-        // setDayOfWeek({});
         let currentMonth, prevMonth;
         const dir = direction === 'forward' ? 1 : -1;
         setMonth(prev => {
@@ -45,15 +36,13 @@ function Calendar() {
         setYear(prev => {
           return (prevMonth === 11 && currentMonth === 0) || (prevMonth === 0 && currentMonth === 11) ? prev + dir : prev;
         });
-        
     }
+
     const monthArr = Array(monthLength + staringDay).fill(0);
 
     for(let i = staringDay; i < monthArr.length; i++){
         monthArr[i] = i - (staringDay - 1);
     }
-    /** */
-
     
     const [daysObject, setDaysObject] = useState((()=>{
         const obj = {};
@@ -64,7 +53,6 @@ function Calendar() {
     })());
     const [dayOfWeek, setDayOfWeek] = useState({});
 
-    // const [selectedMonth, setSelectedMonth] = useState(month);
     
     const digits = [];
     let limit = 0,
@@ -82,8 +70,6 @@ function Calendar() {
                         setDaysObject: setDaysObject, 
                         id: monthArr[limit + weeks],
                         setDayOfWeek: setDayOfWeek,
-                        dayOfWeek: daysOfWeek[weeks],
-                        mark: staringDay
                     }
                 }
              />
@@ -106,7 +92,7 @@ function Calendar() {
             <p 
             className={styles.monthYear}
             >
-                <span onClick={()=>switchMonth('backward')}>{'< '}</span>{months[month]}<span> {year}</span><span onClick={()=>switchMonth('forward')}>{' >'}</span>
+                <span onClick={()=>switchMonth('backward')} style={{marginLeft: '0px'}}>{'< '}</span>{months[month]}<span> {year}</span><span onClick={()=>switchMonth('forward')}>{' >'}</span>
             </p>
           
             <div 
@@ -130,14 +116,14 @@ function Calendar() {
             </div>
         </div>
         <p 
-        className={`${styles.monthYear} ${styles.finalDate}`} 
+        className={`${styles.finalDate}`} 
         style={
             {
                 opacity: !dayOfWeek.prefix ? 0 : 1
             }
         }
         >
-            {dayOfWeek.dayOfWeek} <span>{`${dayOfWeek.dayNum}${dayOfWeek.prefix}`}</span> {months[month]}<span> {year}</span>
+            {daysOfWeek[monthArr.indexOf(dayOfWeek.dayNum) % 7]} <span>{`${dayOfWeek.dayNum}${dayOfWeek.prefix}`}</span> {months[month]}<span> {year}</span>
         </p>
     </>
     )

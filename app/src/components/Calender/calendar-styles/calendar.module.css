@@ -16,10 +16,12 @@
 }
 
 .monthYear {
+    width: 50%;
     margin: 10px auto;
     margin-top: 0px;
     font-family: mb;
     cursor: pointer;
+    text-align: center;
 }
 
 .monthYear span {
@@ -35,8 +37,16 @@
 }
 
 .finalDate {
+    margin: 10px auto;
+    font-family: mb;
+    cursor: pointer;
     margin: auto;
     margin-top: 20px;
+}
+
+.finalDate span {
+    color: #77acff;
+    cursor: pointer;
 }
 
 .weekCont {

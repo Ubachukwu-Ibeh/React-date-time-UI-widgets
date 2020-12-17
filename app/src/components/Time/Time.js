@@ -14,7 +14,9 @@ export default function Time() {
     }
     
     return (
-        <div className={styles.container}>
+        <div className={styles.containerMain}>
+            <p>Set time</p>
+            <div className={styles.container}>
             <div 
             className={styles.ampm}>
                 <p 
@@ -37,6 +39,7 @@ export default function Time() {
             <Digits 
             digits={Array(59).fill(true)}
             />
+        </div>
         </div>
     )
 }

@@ -4,7 +4,6 @@ import styles from './calendar-styles/Day.module.css';
 function Day(props) {
     let lastNum;
     const id = props.data.id,
-    mark = props.data.mark,
     setDayOfWeek = (()=>{
         lastNum = `${id}`.slice(-1);
         switch(true){
@@ -30,7 +29,6 @@ function Day(props) {
 
         props.data.setDayOfWeek({
           prefix: setDayOfWeek, 
-          dayOfWeek: props.data.dayOfWeek,
           dayNum: id
         });
     }
@@ -38,12 +36,9 @@ function Day(props) {
         <div 
         onClick={changeColor} 
         className={`${styles.day} ${props.data.daysObject[id] ? `${styles.selected}` : ''}`}
-        style={{
-            display: id > 35 - mark && mark < 5 ? 'none' : 'flex'
-        }}
         >
             <p>
-                {!id || id > 31 ? '' : id}
+                {id === 0 ? '' : id}
             </p>
         </div>
     )
