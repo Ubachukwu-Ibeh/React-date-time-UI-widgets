@@ -12,7 +12,7 @@ function Calendar() {
     months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     months30 = ['September', 'April', 'June', 'November'],
-    monthLength = (() => {
+    getMonthLength = (month) => {
         switch(true){
             case months30.includes(months[month]):
                 return 30;
@@ -21,8 +21,10 @@ function Calendar() {
             default:
                 return 31;
         }
-    })(),
+    },
     [staringDay, setStartingDay] = useState(1 - ((7 * Math.floor((1 - day) / 7)) + day));
+
+    const currentMonthLength = getMonthLength(month);
 
     const switchMonth = (direction) => {
         let currentMonth, prevMonth;
@@ -32,13 +34,19 @@ function Calendar() {
             prevMonth = prev;
            return currentMonth = (next < 0 ? 11 : next) % 12;
         });
-        setStartingDay(((monthLength - (((7 * Math.floor(monthLength / 7)) - staringDay) + 1)) + 1) % 7);
+        setStartingDay(()=>{
+            const res = getMonthLength(month === 0 ? 11 : month - 1) - (staringDay - 1);
+            return dir > 0 
+            ? ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - staringDay) + 1)) + 1) % 7
+            : 1 - ((7 * Math.floor((1 - res) / 7)) + res)
+        });
         setYear(prev => {
           return (prevMonth === 11 && currentMonth === 0) || (prevMonth === 0 && currentMonth === 11) ? prev + dir : prev;
         });
     }
 
-    const monthArr = Array(monthLength + staringDay).fill(0);
+    
+    const monthArr = Array(currentMonthLength + staringDay).fill(0);
 
     for(let i = staringDay; i < monthArr.length; i++){
         monthArr[i] = i - (staringDay - 1);
@@ -60,7 +68,7 @@ function Calendar() {
     while(weeks < 7){
         limit = 0;
         digits[weeks] = [];
-        while(monthArr[limit + weeks] < monthLength + 1){
+        while(monthArr[limit + weeks] < currentMonthLength + 1){
             digits[weeks].push(
             <Day 
                 key={limit + weeks}

@@ -15,7 +15,7 @@ export default function Time() {
     
     return (
         <div className={styles.containerMain}>
-            <p>Set time</p>
+            {/* <p>Set time</p> */}
             <div className={styles.container}>
             <div 
             className={styles.ampm}>
