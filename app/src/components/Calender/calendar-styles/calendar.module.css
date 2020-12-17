@@ -19,10 +19,12 @@
     margin: 10px auto;
     margin-top: 0px;
     font-family: mb;
+    cursor: pointer;
 }
 
 .monthYear span {
     color: #77acff;
+    cursor: pointer;
 }
 
 .dayOfWeek {
@@ -39,6 +41,7 @@
 
 .weekCont {
     margin: auto;
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
 }

@@ -19,6 +19,7 @@
     color: #cccccc;
     width: 30px;
     margin-right: 0px;
+    cursor: pointer;
 }
 
 .ampm p:nth-child(1) {
