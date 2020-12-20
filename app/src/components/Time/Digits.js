@@ -64,9 +64,11 @@ function Digits(props) {
                  case idx <= 10:
                     return  elems.length > 12 ? `0${idx}` : idx + 1;
                 case idx >= 10:
-                    return elems.length > 12 ? idx : idx + 1
+                    return elems.length > 12 ? idx : idx + 1;
+                default:
+                    return prev;
              }
-         })()}));//problem
+         })()}));
         }
     }
     return (

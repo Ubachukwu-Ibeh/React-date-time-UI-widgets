@@ -1,20 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styles from './url-venue-styles/URL-styles.module.css';
 
 export default function URL() {
     
-    let [url, setUrl] = useState();
+    let [url, setUrl] = useState(),
+    inputElem = useRef();
 
     const initSeturl = val => {
         setUrl(val.match(/(?:[^/]*\/){3}/));
     }
-    
+    const autoPasteLink = async () => {
+        const text = await navigator.clipboard.readText();
+        inputElem.current.value = text;
+    }
     return (
         <div className={styles.main}>
             <p>URL <span>*</span></p>
             <div className={styles.urlInputCont}>
-                <img src={url ? `http://www.google.com/s2/favicons?domain=${url['0']}` : undefined}/>
-                <input type='text' onChange={e => initSeturl(e.target.value)}/>
+                <div className={styles.faviconDisplay} style={{
+                    backgroundImage: url ? `url(http://www.google.com/s2/favicons?domain=${url['0']})` : undefined
+                }}></div>
+                <input 
+                ref={inputElem} 
+                type='text' 
+                onChange={e => initSeturl(e.target.value)}
+                placeholder='Enter URL...'
+                />
+                <div onClick={autoPasteLink} className={styles.paste}></div>
             </div>
         </div>
     )

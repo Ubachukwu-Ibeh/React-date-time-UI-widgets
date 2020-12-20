@@ -1,11 +1,30 @@
+.main {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.today {
+    margin-bottom: 10px;
+    padding: 5px 40px;
+    border-radius: 50px;
+    text-align: center;
+    border: 1px #77acff solid;
+    width: fit-content;
+    cursor: pointer;
+    font-size: 10pt;
+    font-family: mr;
+}
+
 .card {
     background-color: #f3f8ff;
     margin: auto;
     border-radius: 20px;
     display: flex;
-    width: 50%;
     padding: 20px 0px;
     flex-direction: column;
+    width: 100%;
 }
 
 .daysCont {
@@ -54,4 +73,9 @@
     margin-top: 0px;
     display: flex;
     flex-direction: column;
+}
+
+.isSetToToday {
+    background-color: #77acff;
+    color: white;
 }
