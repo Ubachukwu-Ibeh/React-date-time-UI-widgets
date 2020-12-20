@@ -1,0 +1,38 @@
+.main {
+    margin: auto;
+    width: 50%;
+}
+
+.main p {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.main p span {
+    color: red;
+}
+
+.urlInputCont {
+    margin: auto;
+    display: flex;
+    border: 1px solid #cccccc;
+    padding: 10px 0px;
+    border-radius: 5px;
+}
+
+.urlInputCont img {
+    margin: auto;
+    margin-right: 0px;
+    width: 10%;
+    height: 10%;
+}
+
+.urlInputCont input {
+    margin: auto;
+    margin-left: 10px;
+    width: 90%;
+    margin-right: 0px;
+    outline: none;
+    border: none;
+}

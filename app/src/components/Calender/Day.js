@@ -4,7 +4,7 @@ import styles from './calendar-styles/Day.module.css';
 function Day(props) {
     let lastNum;
     const id = props.data.id,
-    setDayOfWeek = (()=>{
+    setDayOfWeekPrefix = (()=>{
         lastNum = `${id}`.slice(-1);
         switch(true){
             case lastNum === '1' && id !== 11:
@@ -28,7 +28,7 @@ function Day(props) {
         props.data.setDaysObject({...prevObj, [id]: !prevObj[id]});
 
         props.data.setDayOfWeek({
-          prefix: setDayOfWeek, 
+          prefix: setDayOfWeekPrefix, 
           dayNum: id
         });
     }

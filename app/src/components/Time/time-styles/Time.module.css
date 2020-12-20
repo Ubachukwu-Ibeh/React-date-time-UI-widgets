@@ -38,3 +38,27 @@
     color: #77acff;
     font-family: mb;
 }
+
+.setTime {
+    font-family: 'Open Sans';
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.setTime span {
+    color: red;
+}
+
+.displayTime {
+    margin-bottom: 10px;
+    font-family: ms;
+    font-size: 11pt;
+}
+
+.displayTime span:nth-child(1) {
+    color: #77acff;
+}
+
+.displayTime span:nth-child(2) {
+    color: #cccccc;
+}

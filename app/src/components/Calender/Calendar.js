@@ -2,17 +2,21 @@ import React, {useState} from 'react';
 import styles from './calendar-styles/Calendar.module.css';
 import Day from './Day.js';
 
+const date = new Date(),
+    getDay = date.getDay(),
+    day = date.getUTCDate() - getDay;
 
 function Calendar() {
-    const date = new Date();
-    let [month, setMonth] = useState(date.getMonth()),
-    getDay = date.getDay(),
-    day = date.getUTCDate() - getDay,
-    [year, setYear] = useState(date.getFullYear()),
-    months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+
+    const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    months30 = ['September', 'April', 'June', 'November'],
-    getMonthLength = (month) => {
+    months30 = ['September', 'April', 'June', 'November'];
+    
+    let [month, setMonth] = useState(date.getMonth()),
+    
+    [year, setYear] = useState(date.getFullYear());
+    
+    const getMonthLength = (month) => {
         switch(true){
             case months30.includes(months[month]):
                 return 30;
@@ -21,8 +25,8 @@ function Calendar() {
             default:
                 return 31;
         }
-    },
-    [staringDay, setStartingDay] = useState(1 - ((7 * Math.floor((1 - day) / 7)) + day));
+    };
+    let [staringDay, setStartingDay] = useState(1 - ((7 * Math.floor((1 - day) / 7)) + day));
 
     const currentMonthLength = getMonthLength(month);
 
@@ -35,7 +39,8 @@ function Calendar() {
            return currentMonth = (next < 0 ? 11 : next) % 12;
         });
         setStartingDay(()=>{
-            const res = getMonthLength(month === 0 ? 11 : month - 1) - (staringDay - 1);
+            const monthEndDay = staringDay - 1;
+            const res = getMonthLength(month === 0 ? 11 : month - 1) - (monthEndDay < 0 ? 6 : monthEndDay);
             return dir > 0 
             ? ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - staringDay) + 1)) + 1) % 7
             : 1 - ((7 * Math.floor((1 - res) / 7)) + res)
@@ -63,28 +68,28 @@ function Calendar() {
 
     
     const digits = [];
-    let limit = 0,
-    weeks = 0;
-    while(weeks < 7){
-        limit = 0;
-        digits[weeks] = [];
-        while(monthArr[limit + weeks] < currentMonthLength + 1){
-            digits[weeks].push(
+    let monthLimit = 0,
+    week = 0;
+    while(week < 7){
+        monthLimit = 0;
+        digits[week] = [];
+        while(monthArr[monthLimit + week] < currentMonthLength + 1){
+            digits[week].push(
             <Day 
-                key={limit + weeks}
+                key={monthLimit + week}
                 data={
                     {
                         daysObject: daysObject, 
                         setDaysObject: setDaysObject, 
-                        id: monthArr[limit + weeks],
+                        id: monthArr[monthLimit + week],
                         setDayOfWeek: setDayOfWeek,
                     }
                 }
              />
             );
-            limit += 7;
+            monthLimit += 7;
         }
-        weeks++;
+        week++;
         }
    
     return (

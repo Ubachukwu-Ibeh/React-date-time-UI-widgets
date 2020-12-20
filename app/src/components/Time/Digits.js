@@ -2,15 +2,15 @@ import React, {useState, useRef} from 'react'
 import styles from './time-styles/Digits.module.css'
 
 let prev = 0, hasSnapped = false;
+
 function Digits(props) {
     const nums = props.digits;
     let [inViewObj, setInViewObj] = useState((()=>{
-        const obj = {
-            1: true
-        };
+        const obj = {};
         nums.forEach((e, i) => {
-            obj[i + 2] = false;
+            obj[i] = false;
         })
+        obj['0'] = true;
         return obj;
     })());
     const [isInView, setIsInView] = useState();
@@ -38,7 +38,7 @@ function Digits(props) {
                const top = elem.getBoundingClientRect().top + (elem.getBoundingClientRect().height / 2);
 
                if(top < digitContTop + 48 && top > digitContTop + 33) {
-                   return [elems[i], i + 1];
+                   return [elems[i], i];
                }
             }
         })();
@@ -58,6 +58,15 @@ function Digits(props) {
              prevObj[idx] = true;
             return prevObj;
          })
+         const setTimeDisplay = props.displayTime;
+         setTimeDisplay(prev => ({...prev, [elems.length > 12 ? 'min' : 'hour']: (() =>{
+             switch (true){
+                 case idx <= 10:
+                    return  elems.length > 12 ? `0${idx}` : idx + 1;
+                case idx >= 10:
+                    return elems.length > 12 ? idx : idx + 1
+             }
+         })()}));//problem
         }
     }
     return (
@@ -68,13 +77,14 @@ function Digits(props) {
         >
             {
                 nums.map((e, i) => {
-                    const id = i + 1;
+                    const id = i;
                     const inView = inViewObj[id];
+                    const digitsLength = nums.length;
                     return <p 
                     key={id}
                     className={inView ? styles.isInView : styles.digit}
                     >
-                        {id < 10 && nums.length > 12 ? '0' + (id - 1) : id}<span>{inView && nums.length > 12 ? ' m' : inView && ' h'}</span>
+                        {id < 10 && digitsLength > 12 ? `0${id}` : id > 10 && digitsLength > 12 ? id : id + 1}<span>{inView && digitsLength > 12 ? ' m' : inView && ' h'}</span>
                     </p>
                 })
             }

@@ -7,7 +7,7 @@ export default function Time() {
         time: 'AM',
         status: true
     });
-
+    let [displayTime, setDisplayTime] = useState({hour: '1', min: '00'});
     const setTimeType = (param) => {
         if(param === time.time) return;
         return setTime(prev => ({time: param, status: !prev.status}));
@@ -15,7 +15,8 @@ export default function Time() {
     
     return (
         <div className={styles.containerMain}>
-            {/* <p>Set time</p> */}
+            <p className={styles.setTime}>Set time <span>*</span></p>
+            <p className={styles.displayTime}><span>{displayTime.hour}:{displayTime.min}</span>{time.time} <span>- To</span></p>
             <div className={styles.container}>
             <div 
             className={styles.ampm}>
@@ -33,11 +34,13 @@ export default function Time() {
                 </p>
             </div>
         
-            <Digits 
+            <Digits
+            displayTime={setDisplayTime} 
             digits={Array(12).fill(true)}
             />
-            <Digits 
-            digits={Array(59).fill(true)}
+            <Digits
+            displayTime={setDisplayTime}  
+            digits={Array(60).fill(true)}
             />
         </div>
         </div>
