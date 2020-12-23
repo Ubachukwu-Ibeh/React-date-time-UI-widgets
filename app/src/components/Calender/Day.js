@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './calendar-styles/Day.module.css';
+
 export const setDayOfWeekPrefix = id =>{
     let lastNum = `${id}`.slice(-1);
     switch(true){
@@ -13,29 +14,38 @@ export const setDayOfWeekPrefix = id =>{
             return `th`;
     }
 };
-function Day(props) {
-    const data = props.data;
-    const id = props.data.id;
+
+const Day = ({ data }) => {
+    const {
+        setDayOfWeek, 
+        setDaysObject, 
+        id, 
+        switchIsSetToToday, 
+        daysObject,
+         today
+        } = data;
+
     const changeColor = () => {
-        if (!id || id > 31) return;
+        if (id === 0) return;
         const prevObj = {...data.daysObject};
 
         for (const key in prevObj) {
             prevObj[key] && (prevObj[key] = false);
         }
 
-        data.setDaysObject({...prevObj, [id]: !prevObj[id]});
+        setDaysObject({...prevObj, [id]: !prevObj[id]});
 
-        data.setDayOfWeek({
+        setDayOfWeek({
           prefix: setDayOfWeekPrefix(id), 
           dayNum: id
         });
-        data.switchIsSetToToday(prev => id === data.today ? prev : false)
+        switchIsSetToToday(prev => id === today ? prev : false)
     }
+    
     return (
         <div 
         onClick={changeColor} 
-        className={`${styles.day} ${data.daysObject[id] ? `${styles.selected}` : ''}`}
+        className={`${styles.day} ${daysObject[id] ? `${styles.selected}` : ''}`}
         >
             <p>
                 {id === 0 ? '' : id}

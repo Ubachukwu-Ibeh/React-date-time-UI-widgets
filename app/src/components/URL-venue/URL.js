@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import styles from './url-venue-styles/URL-styles.module.css';
 
-export default function URL() {
+const URL = () => {
     
     let [url, setUrl] = useState(),
     inputElem = useRef();
@@ -13,6 +13,7 @@ export default function URL() {
         const text = await navigator.clipboard.readText();
         inputElem.current.value = text;
     }
+    
     return (
         <div className={styles.main}>
             <p>URL <span>*</span></p>
@@ -31,3 +32,4 @@ export default function URL() {
         </div>
     )
 }
+export default URL;

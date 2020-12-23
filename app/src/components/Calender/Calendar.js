@@ -7,17 +7,21 @@ const date = new Date(),
     today = date.getUTCDate(),
     day = today - getDay,
     defMonth = date.getMonth(),
-    defYear = date.getFullYear();
+    defYear = date.getFullYear(),
+    defStartingDay = 1 - ((7 * Math.floor((1 - day) / 7)) + day);
 
-function Calendar() {
+const Calendar = () => {
+
     const months = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     months30 = ['September', 'April', 'June', 'November'];
     
+
     let [month, setMonth] = useState(defMonth),
     [year, setYear] = useState(defYear),
     [isSetToToday, setIsSetToToday] = useState(false);
     const [dayOfWeek, setDayOfWeek] = useState({});
+    
     
     const getMonthLength = (month) => {
         switch(true){
@@ -29,9 +33,8 @@ function Calendar() {
                 return 31;
         }
     };
-
-    const defStartingDay = 1 - ((7 * Math.floor((1 - day) / 7)) + day)
-    let [staringDay, setStartingDay] = useState(defStartingDay);
+    
+    let [startingDay, setStartingDay] = useState(defStartingDay);
 
     const currentMonthLength = getMonthLength(month);
 
@@ -50,6 +53,7 @@ function Calendar() {
         })
     }
 
+
     const switchMonth = (direction) => {
         setIsSetToToday(false);
         let currentMonth, prevMonth;
@@ -60,10 +64,10 @@ function Calendar() {
            return currentMonth = (next < 0 ? 11 : next) % 12;
         });
         setStartingDay(()=>{
-            const monthEndDay = staringDay - 1;
+            const monthEndDay = startingDay - 1;
             const res = getMonthLength(month === 0 ? 11 : month - 1) - (monthEndDay < 0 ? 6 : monthEndDay);
             return dir > 0 
-            ? ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - staringDay) + 1)) + 1) % 7
+            ? ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - startingDay) + 1)) + 1) % 7
             : 1 - ((7 * Math.floor((1 - res) / 7)) + res)
         });
         setYear(prev => {
@@ -71,14 +75,18 @@ function Calendar() {
         });
     }
     
-    const monthArr = useMemo(() => {
-        const monthArrSet = Array(currentMonthLength + staringDay).fill(0);
 
-        for(let i = staringDay; i < monthArrSet.length; i++){
-            monthArrSet[i] = i - (staringDay - 1);
+
+    const monthArr = useMemo(() => {
+        const monthArrSet = Array(currentMonthLength + startingDay).fill(0);
+
+        for(let i = startingDay; i < monthArrSet.length; i++){
+            monthArrSet[i] = i - (startingDay - 1);
         }
         return monthArrSet
-    }, [currentMonthLength, staringDay])
+    }, [currentMonthLength, startingDay])
+
+
 
     const [daysObject, setDaysObject] = useState((()=>{
         const obj = {};
@@ -88,15 +96,16 @@ function Calendar() {
         return obj;
     })());
    
-    let digits = useMemo(()=>{
-    let setDigits = [],
+
+
+    let digits = [],
     monthLimit = 0,
     week = 0;
     while(week < 7){
         monthLimit = 0;
-        setDigits[week] = [];
+        digits[week] = [];
         while(monthArr[monthLimit + week] < currentMonthLength + 1){
-            setDigits[week].push(
+            digits[week].push(
             <Day 
                 key={monthLimit + week}
                 data={
@@ -115,9 +124,9 @@ function Calendar() {
         }
         week++;
     }
-    return setDigits;
-    },[currentMonthLength, daysObject, monthArr])
    
+
+
     return (
        <div className={styles.main}>
        <p 

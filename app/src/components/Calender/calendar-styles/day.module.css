@@ -1,21 +1,24 @@
 .day {
-    margin: auto;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    border-radius: 50%;
-    font-family: mb;
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 50%;
+  font-family: mb;
 }
 
 .day:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .selected {
-    background-color: #77acff;
-    color: white;
+  background-color: #77acff;
+  color: white;
 }
 
 .day p {
-    margin: auto;
+  margin: auto;
 }
+/*# sourceMappingURL=Day.module.css.map */

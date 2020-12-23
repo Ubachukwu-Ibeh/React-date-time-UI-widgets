@@ -4,7 +4,7 @@ import Calendar from '../src/components/Calender/Calendar.js';
 import Time from '../src/components/Time/Time.js'
 import URL from '../src/components/URL-venue/URL.js'
 
-export default function App() {
+const App = () => {
     return (
         <div className='main'>
             <Calendar />
@@ -13,3 +13,4 @@ export default function App() {
         </div>
     )
 }
+export default App;

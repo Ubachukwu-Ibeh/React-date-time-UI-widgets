@@ -3,11 +3,14 @@ import styles from './time-styles/Time.module.css'
 import Digits from './Digits.js'
 
 export default function Time() {
+    
     let [time, setTime] = useState({
         time: 'AM',
         status: true
     });
+
     let [displayTime, setDisplayTime] = useState({hour: '1', min: '00'});
+
     const setTimeType = (param) => {
         if(param === time.time) return;
         return setTime(prev => ({time: param, status: !prev.status}));

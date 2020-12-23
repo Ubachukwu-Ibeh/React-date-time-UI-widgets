@@ -1,0 +1,64 @@
+.containerMain {
+    width: 50%;
+    margin: auto;
+}
+
+.container {
+    margin: auto;
+    display: flex;
+    background-color: #f3f8ff;
+    padding: 30px 0px;
+    border-radius: 20px;
+}
+
+.container div:nth-child(3) {
+    margin-right: auto;
+}
+
+.ampm {
+    height: fit-content;
+    margin: auto;
+    margin-top: auto;
+    margin-bottom: 0px;
+    color: #cccccc;
+    width: 30px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+.ampm p:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+.ampm p:nth-child(2) {
+    margin-bottom: -5px;
+}
+
+.selected {
+    color: #77acff;
+    font-family: mb;
+}
+
+.setTime {
+    font-family: 'Open Sans';
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.setTime span {
+    color: red;
+}
+
+.displayTime {
+    margin-bottom: 10px;
+    font-family: ms;
+    font-size: 11pt;
+}
+
+.displayTime span:nth-child(1) {
+    color: #77acff;
+}
+
+.displayTime span:nth-child(2) {
+    color: #cccccc;
+}

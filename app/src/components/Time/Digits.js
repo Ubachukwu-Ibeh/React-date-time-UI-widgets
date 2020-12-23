@@ -3,16 +3,17 @@ import styles from './time-styles/Digits.module.css'
 
 let prev = 0, hasSnapped = false;
 
-function Digits(props) {
-    const nums = props.digits;
+const Digits = ({ digits, displayTime }) => {
+
     let [inViewObj, setInViewObj] = useState((()=>{
         const obj = {};
-        nums.forEach((e, i) => {
+        digits.forEach((e, i) => {
             obj[i] = false;
         })
         obj['0'] = true;
         return obj;
     })());
+    
     const [isInView, setIsInView] = useState();
   
     const digitCont = useRef();
@@ -58,8 +59,7 @@ function Digits(props) {
              prevObj[idx] = true;
             return prevObj;
          })
-         const setTimeDisplay = props.displayTime;
-         setTimeDisplay(prev => ({...prev, [elems.length > 12 ? 'min' : 'hour']: (() =>{
+         displayTime(prev => ({...prev, [elems.length > 12 ? 'min' : 'hour']: (() =>{
              switch (true){
                  case idx <= 10:
                     return  elems.length > 12 ? `0${idx}` : idx + 1;
@@ -71,17 +71,18 @@ function Digits(props) {
          })()}));
         }
     }
+
     return (
         <div 
         className={styles.container}
         ref={digitCont}
-        onScroll={() => setDigitSize()}
+        onScroll={setDigitSize}
         >
             {
-                nums.map((e, i) => {
+                digits.map((e, i) => {
                     const id = i;
                     const inView = inViewObj[id];
-                    const digitsLength = nums.length;
+                    const digitsLength = digits.length;
                     return <p 
                     key={id}
                     className={inView ? styles.isInView : styles.digit}

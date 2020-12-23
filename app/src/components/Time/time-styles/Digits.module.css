@@ -1,37 +1,43 @@
 .container {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    height: 100px;
-    width: 50px;
-    overflow-y: auto;
-    margin-left: 30px;
-    margin-right: 0px;
-    cursor: pointer;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100px;
+  width: 50px;
+  overflow-y: auto;
+  margin-left: 30px;
+  margin-right: 0px;
+  cursor: pointer;
 }
 
 .digit {
-    margin: 5px auto;
-    font-family: mr;
-    color: #cccccc;
+  margin: 5px auto;
+  font-family: mr;
+  color: #cccccc;
 }
 
 .container p:first-child {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .container p:last-child {
-    margin-bottom: 44px;
+  margin-bottom: 44px;
 }
 
 .isInView {
-    margin: 5px auto;
-    color: #77acff;
-    font-family: mb;
-    font-size: 20pt;
+  margin: 5px auto;
+  color: #77acff;
+  font-family: mb;
+  font-size: 20pt;
 }
 
 .isInView span {
-    font-size: 7pt;
-    font-family: mr;
+  font-size: 7pt;
+  font-family: mr;
 }
+/*# sourceMappingURL=Digits.module.css.map */
