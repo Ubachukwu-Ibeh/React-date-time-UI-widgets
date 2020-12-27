@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react';
-import styles from './calendar-styles/Calendar.module.css';
+import styles from './calendar-styles/Calendar.module.scss';
 import Day, {setDayOfWeekPrefix} from './Day.js';
 
 const date = new Date(),
@@ -143,9 +143,11 @@ const Calendar = () => {
             }
         }
         >
-            <p className={styles.monthYear}>
-                <span onClick={()=>switchMonth('backward')} style={{marginLeft: '0px'}}>{'< '}</span>{months[month]}<span> {year}</span><span onClick={()=>switchMonth('forward')}>{' >'}</span>
-            </p>
+            <div className={styles.monthYear}>
+            <div onClick={()=>switchMonth('backward')}></div>
+            <p>{months[month]}<span> {year}</span></p>
+            <div onClick={()=>switchMonth('forward')}></div>
+            </div>
           
             <div className={styles.daysCont}>
             {

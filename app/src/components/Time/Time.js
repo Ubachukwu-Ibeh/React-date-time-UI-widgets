@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from './time-styles/Time.module.css'
+import styles from './time-styles/Time.module.scss'
 import Digits from './Digits.js'
 
 export default function Time() {

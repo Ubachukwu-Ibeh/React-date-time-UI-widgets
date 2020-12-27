@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react'
-import styles from './time-styles/Digits.module.css'
+import styles from './time-styles/Digits.module.scss'
 
 let prev = 0, hasSnapped = false;
 

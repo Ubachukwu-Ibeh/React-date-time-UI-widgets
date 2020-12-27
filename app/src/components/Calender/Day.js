@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './calendar-styles/Day.module.css';
+import styles from './calendar-styles/Day.module.scss';
 
 export const setDayOfWeekPrefix = id =>{
     let lastNum = `${id}`.slice(-1);
