@@ -1,51 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './calendar-styles/Day.module.scss';
 
-export const setDayOfWeekPrefix = id =>{
-    let lastNum = `${id}`.slice(-1);
-    switch(true){
-        case lastNum === '1' && id !== 11:
-            return `st`;
-        case lastNum === '2' && id !== 12:
-            return `nd`;
-        case lastNum === '3' && id !== 13:
-            return `rd`;
-        default: 
-            return `th`;
-    }
-};
+let selectedDays = {};
 
-const Day = ({ data }) => {
-    const {
-        setDayOfWeek, 
-        setDaysObject, 
-        id, 
-        switchIsSetToToday, 
-        daysObject,
-         today
-        } = data;
+const Day = ({ id, setDayData/**@object */ }) => {
+    const {setDay, monthData, setToToday} = setDayData;
+    let [selected, setSelected] = useState(false);
 
     const changeColor = () => {
         if (id === 0) return;
-        const prevObj = {...data.daysObject};
-
-        for (const key in prevObj) {
-            prevObj[key] && (prevObj[key] = false);
+        for (const selected in selectedDays) {
+            selectedDays[selected](prev => !prev);
         }
-
-        setDaysObject({...prevObj, [id]: !prevObj[id]});
-
-        setDayOfWeek({
-          prefix: setDayOfWeekPrefix(id), 
-          dayNum: id
-        });
-        switchIsSetToToday(prev => id === today ? prev : false)
+        selectedDays = {};
+        selectedDays[id] = setSelected;
+        selectedDays[id](prev => !prev);
+        setDay({...setToToday(monthData, id)});
     }
-    
     return (
         <div 
         onClick={changeColor} 
-        className={`${styles.day} ${daysObject[id] ? `${styles.selected}` : ''}`}
+        className={`${styles.day} ${selected ? `${styles.selected}` : ''}`}
         >
             <p>
                 {id === 0 ? '' : id}
