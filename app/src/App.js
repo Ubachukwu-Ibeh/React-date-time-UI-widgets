@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss'
-import Calendar from '../src/components/Calender/Calendar.js';
-import Time from '../src/components/Time/Time.js'
-import URL from '../src/components/URL-venue/URL.js'
+import Calendar from './components/Calender/Calendar';
+import Time from './components/Time/Time'
+import URL from './components/URL-venue/URL'
 
 const App = () => {
     return (
