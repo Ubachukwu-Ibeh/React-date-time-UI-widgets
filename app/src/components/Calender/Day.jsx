@@ -4,14 +4,7 @@ import styles from './calendar-styles/Day.module.scss';
 let hasSelected = false;
 /**@param setDayData - object containing necessary info for setting days  */
 const Day = ({ id, setDayData }) => {
-    const {
-        setDay,
-        monthData,
-        setToToday,
-        dayNumber,
-        setIsSetToToday,
-        isSetToToday
-    } = setDayData;
+    const { setDay, monthData, setToToday, dayNumber, setIsSetToToday, isSetToToday } = setDayData;
 
     const changeColor = () => {
         if (id === 0 || id === dayNumber) return;
