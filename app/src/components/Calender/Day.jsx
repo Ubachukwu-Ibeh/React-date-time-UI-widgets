@@ -1,25 +1,28 @@
 import React from 'react'
 import styles from './calendar-styles/Day.module.scss';
 
-let selectedDays = {};
-const resetSelectedDays = (id) => {
-    selectedDays = {};
-    selectedDays[id] = true;
-}
-const Day = ({ id, setDayData/**@object */ }) => {
-    const { setDay, monthData, setToToday, dayNumber } = setDayData;
-
-    id === dayNumber && resetSelectedDays(id)
+/**@param setDayData - object containing necessary info for setting days  */
+let hasSelected = false,
+const Day = ({ id, setDayData }) => {
+    const {
+        setDay,
+        monthData,
+        setToToday,
+        dayNumber,
+        setIsSetToToday
+    } = setDayData;
 
     const changeColor = () => {
-        if (id === 0) return;
-        resetSelectedDays(id);
+        if (id === 0 || id === dayNumber) return;
         setDay(() => ({ ...setToToday(monthData, id) }));
+        setIsSetToToday(prev => prev ? !prev : prev);
+        hasSelected = true;
+        console.log(isSetToToday)
     }
     return (
         <div
             onClick={changeColor}
-            className={`${styles.day} ${selectedDays[id] ? `${styles.selected}` : ''}`}
+            className={`${styles.day} ${id === dayNumber && hasSelected ? `${styles.selected}` : ''}`}
         >
             <p>
                 {id === 0 ? '' : id}

@@ -1,32 +1,27 @@
 import React, { useState } from 'react';
 import styles from './calendar-styles/Calendar.module.scss';
 import Day from './Day';
-import {
-    today,
-    calendar,
-    currentMonth,
-    year,
-    defaultDate,
-    setToToday
-} from "../../utils/calendarDefaults.js";
+import Calenda from '../../utils/calenda'
+import { today, currentMonth, year, setToToday } from "../../utils/calendarDefaults.js";
 
 const Calendar = () => {
-    let [monthData, setMonthData] = useState(calendar.getStructure()),
+    let [monthData, setMonthData] = useState(new Calenda({ month: currentMonth }).getStructure()),
         [day, setDay] = useState(undefined),
         [isSetToToday, setIsSetToToday] = useState(false);
 
     const defaultDay = () => {
-        setMonthData(() => ({ ...defaultDate }));
-        setDay(() => ({ ...setToToday(defaultDate, today) }));
-        setIsSetToToday(prev => !prev);
+        const res = new Calenda({ month: currentMonth }).getStructure();
+        setMonthData(() => ({ ...res }));
+        setDay(() => ({ ...setToToday(res, today) }));
+        setIsSetToToday(true);
     }
     const switchMonth = (str) => {
         setMonthData(prev => ({ ...prev.moveMonth(str).getStructure() }));
         setDay(() => {
-            const res = setToToday(monthData, day && !isSetToToday ? day.dayNumber : today);
-            return res ? { ...res } : { ...setToToday(monthData, 1) };//default to day 1 if day is not available in next month;
+            let { ...res } = setToToday(monthData, day && !isSetToToday ? day.dayNumber : today) || setToToday(monthData, 1);//default to day 1 if day is not available in next month;
+            return res;
         })
-        // setIsSetToToday(prev => !prev);
+        setIsSetToToday(false);
     }
     const setDayData = {
         setDay: setDay,

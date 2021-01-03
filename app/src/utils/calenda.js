@@ -21,11 +21,28 @@ var date = new Date(), dayWeekNum = date.getDay(), today = date.getUTCDate(), de
             return "th";
     }
 };
-var startingDay = getStartingDay(dayWeekNum, today);
 var Calenda = /** @class */ (function () {
     function Calenda(_a) {
         var _this = this;
         var month = _a.month;
+        this.getStructure = function () {
+            var currentMonthLength = getMonthLength(_this.monthIdx);
+            var monthArr = Array(currentMonthLength + _this.startingDay).fill(0);
+            for (var i = _this.startingDay; i < monthArr.length; i++) {
+                monthArr[i] = i - (_this.startingDay - 1);
+            }
+            var monthLimit = 0, week = 0;
+            while (week < 7) {
+                monthLimit = 0;
+                _this.structure[daysOfWeek[week]] = [];
+                while (monthArr[monthLimit + week] < currentMonthLength + 1) {
+                    _this.structure[daysOfWeek[week]].push(monthArr[monthLimit + week]);
+                    monthLimit += 7;
+                }
+                week++;
+            }
+            return _this;
+        };
         this.getInfo = function (day, options) {
             var _loop_1 = function (key) {
                 var daysArr = _this.structure[key];
@@ -62,46 +79,26 @@ var Calenda = /** @class */ (function () {
             return direction === 'forward' ?
                 (function () {
                     var prevMonth = _this.prevMonth = _this.currentMonth, currentMonth = _this.currentMonth = (_this.currentMonth + 1) % 12;
-                    startingDay = ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - startingDay) + 1)) + 1) % 7; //get what the dayweeknum of any other day will be from the starting day.
+                    _this.startingDay = ((currentMonthLength - (((7 * Math.floor(currentMonthLength / 7)) - _this.startingDay) + 1)) + 1) % 7; //get what the dayweeknum of any other day will be from the starting day.
                     ((prevMonth === 11 && currentMonth === 0) || (prevMonth === 0 && currentMonth === 11)) && (_this.year += 1);
-                    return _this.getStructure({
-                        month: months[_this.monthIdx = currentMonth]
-                    });
+                    _this.monthIdx = currentMonth;
+                    return _this;
                 })() :
                 direction === 'backward' && (function () {
-                    var monthEndDayNum = startingDay - 1, finalMonthEndDayNum = monthEndDayNum < 0 ? 6 : monthEndDayNum, newMonthIdx = _this.monthIdx - 1, getMonth = newMonthIdx < 0 ? 11 : newMonthIdx, monthEndDay = getMonthLength(getMonth), prevMonth = _this.prevMonth = _this.currentMonth, currentMonth = _this.currentMonth = getMonth;
-                    startingDay = getStartingDay(finalMonthEndDayNum, monthEndDay);
+                    var monthEndDayNum = _this.startingDay - 1, finalMonthEndDayNum = monthEndDayNum < 0 ? 6 : monthEndDayNum, newMonthIdx = _this.monthIdx - 1, getMonth = newMonthIdx < 0 ? 11 : newMonthIdx, monthEndDay = getMonthLength(getMonth), prevMonth = _this.prevMonth = _this.currentMonth, currentMonth = _this.currentMonth = getMonth;
+                    _this.startingDay = getStartingDay(finalMonthEndDayNum, monthEndDay);
                     ((prevMonth === 11 && currentMonth === 0) || (prevMonth === 0 && currentMonth === 11)) && (_this.year -= 1);
-                    return _this.getStructure({
-                        month: months[_this.monthIdx = currentMonth]
-                    });
+                    _this.monthIdx = currentMonth;
+                    return _this;
                 })();
         };
+        this.startingDay = getStartingDay(dayWeekNum, today);
         this.monthIdx = months.indexOf(month);
         this.year = defYear;
         this.structure = {};
         this.info = {};
         this.currentMonth = this.monthIdx;
         this.prevMonth = undefined;
-        this.getStructure = function () {
-            var currentMonthLength = getMonthLength(_this.monthIdx);
-            var monthArr = Array(currentMonthLength + startingDay).fill(0);
-            for (var i = startingDay; i < monthArr.length; i++) {
-                monthArr[i] = i - (startingDay - 1);
-            }
-            var monthLimit = 0, week = 0;
-            while (week < 7) {
-                monthLimit = 0;
-                _this.structure[daysOfWeek[week]] = [];
-                while (monthArr[monthLimit + week] < currentMonthLength + 1) {
-                    _this.structure[daysOfWeek[week]].push(monthArr[monthLimit + week]);
-                    monthLimit += 7;
-                }
-                week++;
-            }
-            return _this;
-        };
-        return this;
     }
     return Calenda;
 }());
