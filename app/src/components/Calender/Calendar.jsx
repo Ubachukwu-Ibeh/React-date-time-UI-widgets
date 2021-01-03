@@ -15,10 +15,11 @@ const Calendar = () => {
         setDay(() => ({ ...setToToday(res, today) }));
         setIsSetToToday(true);
     }
-    const switchMonth = (str) => {
-        setMonthData(prev => ({ ...prev.moveMonth(str).getStructure() }));
+    const switchMonth = str => {
+        let newMonthDataState;
+        setMonthData(prev => newMonthDataState = { ...prev.moveMonth(str).getStructure() });
         setDay(() => {
-            let { ...res } = setToToday(monthData, day && !isSetToToday ? day.dayNumber : today) || setToToday(monthData, 1);//default to day 1 if day is not available in next month;
+            let { ...res } = setToToday(newMonthDataState, day && !isSetToToday ? day.dayNumber : today) || setToToday(newMonthDataState, 1);//default to day 1 if day is not available in next month;
             return res;
         })
         setIsSetToToday(false);
@@ -70,9 +71,7 @@ const Calendar = () => {
                 </div>
             </div>
             {day &&
-                <p
-                    className={`${styles.finalDate}`}
-                >
+                <p className={`${styles.finalDate}`}>
                     {day.dayOfWeek} <span>{`${day.dayNumber}${day.suffix}`}</span> {day.monthOfYear}<span> {day.year}</span>
                 </p>}
         </div>

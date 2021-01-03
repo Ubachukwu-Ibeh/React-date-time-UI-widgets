@@ -24,9 +24,7 @@ const Day = ({ id, setDayData }) => {
             onClick={changeColor}
             className={`${styles.day} ${(hasSelected && id === dayNumber) || (isSetToToday && id === dayNumber) ? `${styles.selected}` : ''}`}
         >
-            <p>
-                {id === 0 ? '' : id}
-            </p>
+            <p>{id === 0 ? '' : id}</p>
         </div>
     )
 }
