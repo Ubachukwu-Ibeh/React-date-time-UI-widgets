@@ -28,7 +28,8 @@ const Calendar = () => {
         monthData: monthData,
         setToToday: setToToday,
         dayNumber: day && day.dayNumber,
-        setIsSetToToday: setIsSetToToday
+        setIsSetToToday: setIsSetToToday,
+        isSetToToday: isSetToToday,
     }
     return (
         <div className={styles.main}>
