@@ -4,7 +4,6 @@ import styles from './time-styles/Digits.module.scss'
 let prev = 0, hasSnapped = false;
 
 const Digits = ({ digits, displayTime }) => {
-
     let [inViewObj, setInViewObj] = useState((() => {
         const obj = {};
         digits.forEach((e, i) => {
@@ -15,7 +14,6 @@ const Digits = ({ digits, displayTime }) => {
     })());
 
     const [isInView, setIsInView] = useState();
-
     const digitCont = useRef();
 
     const setDigitSize = () => {
@@ -28,11 +26,9 @@ const Digits = ({ digits, displayTime }) => {
         } else if (diff > 0) {
             diff < 20 && !hasSnapped && main.scrollTo(0, scrollAmt + 1);
         }
-
         prev = scrollAmt;
 
         const elems = digitCont.current.childNodes,
-
             elemInView = (() => {
                 for (let i = 0; i < elems.length; i++) {
                     const elem = elems[i];
@@ -73,7 +69,6 @@ const Digits = ({ digits, displayTime }) => {
             }));
         }
     }
-
     return (
         <div
             className={styles.container}

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styles from './calendar-styles/Calendar.module.scss';
-import Day from './Day';
+import React, { useState } from 'react'
+import styles from './calendar-styles/Calendar.module.scss'
+import Day from './Day'
 import Calenda from '../../utils/calenda'
-import { today, currentMonth, year, setToToday } from "../../utils/calendarDefaults.js";
+import { today, currentMonth, year, setToToday } from "../../utils/calendarDefaults.js"
 
 const Calendar = () => {
     let [monthData, setMonthData] = useState(new Calenda({ month: currentMonth }).getStructure()),

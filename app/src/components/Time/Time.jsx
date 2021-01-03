@@ -2,20 +2,17 @@ import React, { useState } from 'react'
 import styles from './time-styles/Time.module.scss'
 import Digits from './Digits'
 
-export default function Time() {
-
+const Time = () => {
     let [time, setTime] = useState({
         time: 'AM',
         status: true
     });
-
     let [displayTime, setDisplayTime] = useState({ hour: '1', min: '00' });
 
     const setTimeType = (param) => {
         if (param === time.time) return;
         return setTime(prev => ({ time: param, status: !prev.status }));
     }
-
     return (
         <div className={styles.containerMain}>
             <p className={styles.setTime}>Set time <span>*</span></p>
@@ -49,3 +46,4 @@ export default function Time() {
         </div>
     )
 }
+export default Time;
