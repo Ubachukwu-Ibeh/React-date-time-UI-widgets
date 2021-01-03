@@ -49,38 +49,32 @@ const Calendar = () => {
                     <div onClick={() => switchMonth('forward')}></div>
                 </div>
                 <div className={styles.daysCont}>
-                    {
-                        Object.keys(monthData.structure).map((e, i) =>
-                            <div
-                                key={i}
-                                className={styles.weekCont}
+                    {Object.keys(monthData.structure).map((e, i) =>
+                        <div
+                            key={i}
+                            className={styles.weekCont}
+                        >
+                            <p
+                                key={`week${i}`}
+                                className={styles.dayOfWeek}
                             >
-                                <p
-                                    key={`week${i}`}
-                                    className={styles.dayOfWeek}
-                                >
-                                    {e}
-                                </p>
-                                {
-                                    monthData.structure[e].map((a, i) =>
-                                        <Day
-                                            key={`day${i}`}
-                                            id={a}
-                                            setDayData={setDayData}
-                                        />)
-                                }
-                            </div>)
-                    }
+                                {e}
+                            </p>
+                            {monthData.structure[e].map((a, i) =>
+                                <Day
+                                    key={`day${i}`}
+                                    id={a}
+                                    setDayData={setDayData}
+                                />)}
+                        </div>)}
                 </div>
             </div>
-            {
-                day &&
+            {day &&
                 <p
                     className={`${styles.finalDate}`}
                 >
                     {day.dayOfWeek} <span>{`${day.dayNumber}${day.suffix}`}</span> {day.monthOfYear}<span> {day.year}</span>
-                </p>
-            }
+                </p>}
         </div>
     )
 }
