@@ -16,8 +16,8 @@ const Calendar = () => {
         setIsSetToToday(true);
     }
     const switchMonth = str => {
-        let newMonthDataState;
-        setMonthData(prev => newMonthDataState = { ...prev.moveMonth(str).getStructure() });
+        let newMonthDataState = { ...monthData.moveMonth(str).getStructure() };
+        setMonthData(() => newMonthDataState);
         setDay(() => {
             let { ...res } = setToToday(newMonthDataState, day && !isSetToToday ? day.dayNumber : today) || setToToday(newMonthDataState, 1);//default to day 1 if day is not available in next month;
             return res;
