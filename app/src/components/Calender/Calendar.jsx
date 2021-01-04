@@ -71,7 +71,7 @@ const Calendar = () => {
                 </div>
             </div>
             {day &&
-                <p className={`${styles.finalDate}`}>
+                <p className={styles.finalDate}>
                     {day.dayOfWeek} <span>{`${day.dayNumber}${day.suffix}`}</span> {day.monthOfYear}<span> {day.year}</span>
                 </p>}
         </div>
