@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import styles from './calendar-styles/Calendar.module.scss'
 import Day from './Day'
 import Calenda from '../../utils/calenda'
-import * as dateDefaults from "../../utils/calendarDefaults.js"
+import { today, currentMonth, year, setToToday } from "../../utils/calendarDefaults.js"
 
 const Calendar = () => {
-    const { today, currentMonth, year, setToToday } = dateDefaults;
     let [monthData, setMonthData] = useState(new Calenda({ month: currentMonth }).getStructure()),
         [day, setDay] = useState(undefined),
         [isSetToToday, setIsSetToToday] = useState(false);
