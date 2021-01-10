@@ -18,8 +18,7 @@ const Time = () => {
             <p className={styles.setTime}>Set time <span>*</span></p>
             <p className={styles.displayTime}><span>{displayTime.hour}:{displayTime.min}</span>{time.time} <span>- To</span></p>
             <div className={styles.container}>
-                <div
-                    className={styles.ampm}>
+                <div className={styles.ampm}>
                     <p
                         onClick={() => setTimeType('AM')}
                         className={time.status ? styles.selected : ''}
