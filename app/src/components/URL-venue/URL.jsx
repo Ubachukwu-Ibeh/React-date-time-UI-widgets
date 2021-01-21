@@ -9,6 +9,7 @@ const URL = () => {
     const initSeturl = val => {
         setUrl(val.match(/(?:[^/]*\/){3}/));
     }
+    
     const autoPasteLink = async () => {
         const text = await navigator.clipboard.readText();
         inputElem.current.value = text;
