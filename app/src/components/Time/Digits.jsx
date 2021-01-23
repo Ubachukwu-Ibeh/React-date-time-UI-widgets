@@ -9,7 +9,6 @@ let prev = 0,
 
 const Digits = ({
     setDisplayTime,
-    displayTime,
     digits
 }) => {
     let [inViewObj, setInViewObj] = useState(
@@ -124,11 +123,11 @@ const Digits = ({
     }
 
     const produceTimeDisplay = id => {
-        if(id < 10){
+        if (id < 10) {
 
             return '0' + id;
 
-        }else{
+        } else {
 
             return id;
 
