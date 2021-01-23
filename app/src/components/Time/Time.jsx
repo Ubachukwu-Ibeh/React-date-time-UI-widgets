@@ -11,11 +11,6 @@ const Time = () => {
         status: true
     });
 
-    let [displayTime, setDisplayTime] = useState({
-        hour: '1',
-        min: '00'
-    });
-
     const setTimeType = (param) => {
 
         if (param === time.time) return;
@@ -25,7 +20,16 @@ const Time = () => {
             status: !prev.status
         }));
     }
+
+    let [displayTime, setDisplayTime] = useState({
+        hour: '1',
+        min: '00'
+    });
     
+    const displayTimeData = {
+        displayTime: displayTime,
+        setDisplayTime: setDisplayTime
+    }
     return (
         <div className={styles.containerMain}>
             <p className={styles.setTime}>Set time <span>*</span></p>
@@ -44,8 +48,8 @@ const Time = () => {
                     </p>
                 </div>
 
-                <Digits displayTime={setDisplayTime} digits={Array(12).fill(true)} />
-                <Digits displayTime={setDisplayTime} digits={Array(60).fill(true)} />
+                <Digits {...displayTimeData} digits={Array(12).fill(true)} />
+                <Digits {...displayTimeData} digits={Array(60).fill(true)} />
             </div>
         </div>
     )

@@ -8,8 +8,9 @@ let prev = 0,
     hasSnapped = false;
 
 const Digits = ({
-    digits,
-    displayTime
+    setDisplayTime,
+    displayTime,
+    digits
 }) => {
     let [inViewObj, setInViewObj] = useState(
         (() => {
@@ -98,7 +99,7 @@ const Digits = ({
             })
             
             
-            displayTime(prev => ({
+            setDisplayTime(prev => ({
 
                 ...prev,
 
@@ -122,23 +123,31 @@ const Digits = ({
         }
     }
 
+    const produceTimeDisplay = id => {
+        if(id < 10){
+
+            return '0' + id;
+
+        }else{
+
+            return id;
+
+        }
+    }
+    
     return (
         <div className={styles.container} ref={digitCont} onScroll={setDigitSize}>
             {
-                digits.map((e, i) => {
+               Object.keys(inViewObj).map((e, i) => {
                 
-                const id = i;
+                const id = digits.length > 12 ? i : i + 1;
 
-                const inView = inViewObj[id];
+                const inView = inViewObj[e];
 
                 const digitsLength = digits.length;
 
-                return <p 
-                    key={id} 
-                    className={inView ? styles.isInView : styles.digit}
-                    >
-                    {id < 10 && digitsLength> 12 ? `0${id}` : id > 10 && digitsLength > 12 ? id : id +
-                        1}<span>{inView && digitsLength > 12 ? ' m' : inView && ' h'}</span>
+                return <p key={id} className={inView ? styles.isInView : styles.digit}>
+                    {produceTimeDisplay(id)}<span>{inView && digitsLength > 12 ? ' m' : inView && ' h'}</span>
                     </p>
                 })
             }
