@@ -19,7 +19,7 @@ const Time = () => {
 
   let [displayTime, setDisplayTime] = useState({
     hour: "1",
-    min: "00"
+    minute: "00"
   });
 
   const displayTimeData = {
@@ -33,7 +33,7 @@ const Time = () => {
       </p>
       <p className={styles.displayTime}>
         <span>
-          {displayTime.hour}:{displayTime.min}
+          {displayTime.hour}:{displayTime.minute}
         </span>
         {time.time} <span>- To</span>
       </p>
@@ -51,8 +51,16 @@ const Time = () => {
           </p>
         </div>
 
-        <Digits {...displayTimeData} digits={Array(12).fill(true)} />
-        <Digits {...displayTimeData} digits={Array(60).fill(true)} />
+        <Digits
+          {...displayTimeData}
+          type="hour"
+          digits={Array(12).fill(true)}
+        />
+        <Digits
+          {...displayTimeData}
+          type="minute"
+          digits={Array(60).fill(true)}
+        />
       </div>
     </div>
   );

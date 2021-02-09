@@ -110,3 +110,8 @@
     background-color: #77acff;
     color: white;
 }
+@media screen and (max-width: 600px){
+    .main{
+        width: 90%;
+    }
+}

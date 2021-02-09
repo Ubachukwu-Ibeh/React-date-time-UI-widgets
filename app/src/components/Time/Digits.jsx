@@ -4,7 +4,7 @@ import styles from "./time-styles/Digits.module.scss";
 let prev = 0,
   hasSnapped = false;
 
-const Digits = ({ setDisplayTime, digits }) => {
+const Digits = ({ setDisplayTime, digits, type }) => {
   let [inViewObj, setInViewObj] = useState(
     (() => {
       const obj = {};
@@ -19,6 +19,18 @@ const Digits = ({ setDisplayTime, digits }) => {
     })()
   );
 
+  const getTimeDisplay = (id, type, fallBack) => {
+    switch (true) {
+      case id < 10:
+        return type === "minute" ? `0${id}` : id + 1;
+
+      case id >= 10:
+        return type === "minute" ? id : id + 1;
+
+      default:
+        return fallBack;
+    }
+  };
   const [isInView, setIsInView] = useState();
 
   const digitCont = useRef();
@@ -84,43 +96,20 @@ const Digits = ({ setDisplayTime, digits }) => {
       setDisplayTime(prev => ({
         ...prev,
 
-        [elems.length > 12 ? "min" : "hour"]: (() => {
-          switch (true) {
-            case idx <= 10:
-              return elems.length > 12 ? `0${idx}` : idx + 1;
-
-            case idx >= 10:
-              return elems.length > 12 ? idx : idx + 1;
-
-            default:
-              return prev;
-          }
-        })()
+        [type]: getTimeDisplay(idx, type, prev)
       }));
-    }
-  };
-
-  const produceTimeDisplay = id => {
-    if (id < 10) {
-      return "0" + id;
-    } else {
-      return id;
     }
   };
 
   return (
     <div className={styles.container} ref={digitCont} onScroll={setDigitSize}>
       {Object.keys(inViewObj).map((e, i) => {
-        const id = digits.length > 12 ? i : i + 1;
-
         const inView = inViewObj[e];
 
-        const digitsLength = digits.length;
-
         return (
-          <p key={id} className={inView ? styles.isInView : styles.digit}>
-            {produceTimeDisplay(id)}
-            <span>{inView && digitsLength > 12 ? " m" : inView && " h"}</span>
+          <p key={i} className={inView ? styles.isInView : styles.digit}>
+            {getTimeDisplay(i, type)}
+            <span>{inView && type === "minute" ? " m" : inView && " h"}</span>
           </p>
         );
       })}

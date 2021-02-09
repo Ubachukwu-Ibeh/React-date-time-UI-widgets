@@ -62,3 +62,8 @@
         color: #cccccc;
     }
 }
+@media screen and (max-width: 600px){
+    .containerMain{
+        width: 90%;
+    }
+}
