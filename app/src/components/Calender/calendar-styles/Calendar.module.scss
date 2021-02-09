@@ -16,6 +16,7 @@
     cursor: pointer;
     font-size: 10pt;
     font-family: mr;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .card {
@@ -28,6 +29,7 @@
     margin-bottom: 10px;
     flex-direction: column;
     width: 100%;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .daysCont {
