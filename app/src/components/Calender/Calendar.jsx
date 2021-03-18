@@ -57,12 +57,12 @@ const Calendar = () => {
   };
 
   const setDayData = {
-    setDay: setDay,
-    monthData: monthData,
-    setToToday: setToToday,
+    setDay,
+    monthData,
+    setToToday,
     dayNumber: day && day.dayNumber,
-    setIsSetToToday: setIsSetToToday,
-    isSetToToday: isSetToToday
+    setIsSetToToday,
+    isSetToToday
   };
 
   return (

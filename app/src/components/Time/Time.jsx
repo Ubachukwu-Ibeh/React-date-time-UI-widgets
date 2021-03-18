@@ -23,8 +23,8 @@ const Time = () => {
   });
 
   const displayTimeData = {
-    displayTime: displayTime,
-    setDisplayTime: setDisplayTime
+    displayTime,
+    setDisplayTime
   };
   return (
     <div className={styles.containerMain}>
